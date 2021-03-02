@@ -1,0 +1,96 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "monday-import-mapping",
+    "title": "Excel to Monday Import Mapping",
+    "description": "Mapping file which describes how to import an excel sheet into a monday board",
+    "type": "object",
+    "properties": {
+        "boardId": {
+            "description": "Monday board identifier",
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "source": {
+            "description": "Path to the excel file",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "item": {
+            "description": "Main item mapping",
+            "$ref": "#/definitions/item-mapping"
+        },
+        "subitem": {
+            "description": "Optional sub item mapping",
+            "$ref": "#/definitions/item-mapping",
+            "properties": {
+                "groupingColumns":{
+                    "description": "One or more Excel column keys to group data on",
+                    "type":["string","array"],
+                    "items": {"type":"string"}
+                }
+            },
+            "required": ["groupingColumns"]
+        }
+    },
+    "required": [
+        "item"
+    ],
+    "definitions": {
+        "item-mapping": {
+            "type": "object",
+            "properties": {
+                "nameColumn": {
+                    "description": "Id of Excel column to be used as name",
+                    "type": "string"
+                },
+                "columnMappings": {
+                    "description": "Set of column mappings",
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "items": {
+                        "$ref": "#/definitions/column-mapping"
+                    },
+                    "minItems": 0
+                }
+            },
+            "required": [
+                "nameColumn"
+            ]
+        },
+        "column-mapping": {
+            "type": "object",
+            "properties": {
+                "mondayColumn": {
+                    "description": "Monday column id",
+                    "type": "string"
+                },
+                "excelColumn": {
+                    "description": "Excel column id",
+                    "type": "string"
+                },
+                "dataType": {
+                    "description": "Type of data",
+                    "type": "string",
+                    "enum": [
+                        "percentage",
+                        "string",
+                        "numeric",
+                        "date-time",
+                        "status"
+                    ]
+                }
+            },
+            "required": [
+                "mondayColumn",
+                "excelColumn",
+                "dataType"
+            ]
+        }
+    }
+}
