@@ -66,12 +66,12 @@
         "column-mapping": {
             "type": "object",
             "properties": {
-                "mondayColumn": {
-                    "description": "Monday column id",
+                "targetColumn": {
+                    "description": "Monday target column id",
                     "type": "string"
                 },
-                "excelColumn": {
-                    "description": "Excel column id",
+                "sourceColumn": {
+                    "description": "Excel source column id",
                     "type": "string"
                 },
                 "dataType": {
