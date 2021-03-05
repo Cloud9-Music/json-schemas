@@ -87,8 +87,8 @@
                 }
             },
             "required": [
-                "mondayColumn",
-                "excelColumn",
+                "targetColumn",
+                "sourceColumn",
                 "dataType"
             ]
         }
